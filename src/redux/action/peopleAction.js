@@ -21,13 +21,17 @@ export const fetchingPeopleFailure = (error) => ({
 export const fetchPeople = () => async (dispatch) => {
   try {
     dispatch({type: FETCHING_PEOPLE_REQUEST});
-    const requestUrl =
-      'http://js-post-api.herokuapp.com/api/posts?_limit=50&_page=1';
-    const response = await fetch(requestUrl);
-    const responseJSON = await response.json();
-    console.log(responseJSON);
-    dispatch(fetchingPeopleSuccess(responseJSON));
+    // dispatch({type: FETCHING_PEOPLE_SUCCESS, data:null});
+    const url = 'http://js-post-api.herokuapp.com/api/posts?_limit=50&_page=1';
+    const response = await fetch(url);
+    const responseBody = await response.json();
+    console.log(responseBody.data);
+    dispatch(fetchingPeopleSuccess(responseBody.data));
   } catch (error) {
-    dispatch(fetchingPeopleFailure(error));
+    console.error(error);
+    dispatch({
+      type: FETCHING_PEOPLE_FAILURE,
+      message: error,
+    });
   }
 };

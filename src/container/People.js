@@ -21,8 +21,19 @@ export default function People(props) {
     dispatch(fetchPeople());
   }, []);
   return (
-    <View>
-      <Text>{data}</Text>
+    <View style={styles.container}>
+      {isFetching == true ? (
+        <Text style={styles.text}>Đang tải dữ liệu...</Text>
+      ) : (
+        <View style={{width: '100%'}}>
+          <FlatList
+            data={data}
+            renderItem={({item, index}) => {
+              return <List item={item} index={index} />;
+            }}
+          />
+        </View>
+      )}
     </View>
   );
 }
@@ -32,6 +43,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#093339',
+  },
+  text: {
+    color: '#ffff',
+    fontSize: 20,
   },
   cardContainerStyle: {
     flex: 1,

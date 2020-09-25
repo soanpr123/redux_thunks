@@ -3,13 +3,13 @@ import {
   FETCHING_PEOPLE_SUCCESS,
   FETCHING_PEOPLE_REQUEST,
 } from '../action/types';
-const initiaState = {
+const initialState = {
   isFetching: false,
   errorMessage: null,
-  data: [],
+  data: null,
 };
 
-export const peopleReducer = (state = initiaState, action) => {
+export const peopleReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCHING_PEOPLE_REQUEST:
       return {...state, isFetching: true};
